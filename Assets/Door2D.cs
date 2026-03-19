@@ -56,6 +56,14 @@ public class Door2D : MonoBehaviour
         Debug.LogError("Inventory not found in scene!");
         return;
     }
+    // 가짜 열쇠로 시도했을 때
+    if (Selection.Is("FakeKey"))
+    {
+        if (PopupUI.I != null)
+            PopupUI.I.Show("The key doesn't fit...");
+        StartCoroutine(Shake());
+        return;
+    }
 
     // 선택된 아이템이 Key가 아니면 잠김 처리
     if (!inv.Has(requiredItem) || !Selection.Is(requiredItem))

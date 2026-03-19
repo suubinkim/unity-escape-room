@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class KeyPickup : ClickableWorld2D
 {
-    public string itemId = "Key";
     public string pickupMsg = "Picked up a key!";
+       public ItemData itemData;
 
     protected override void OnClicked()
     {
@@ -24,7 +24,7 @@ public class KeyPickup : ClickableWorld2D
             return;
         }
 
-        inv.Add(itemId);
+        inv.Add(itemData);
         GameState.I.keyTaken = true;
 
         if (PopupUI.I != null) PopupUI.I.Show(pickupMsg);

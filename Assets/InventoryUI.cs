@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Image slotBg1;        // Slot1
-    public Image slotIcon1;      // SlotIcon1
-    public Sprite keySprite;     // 🔑 열쇠 스프라이트
+    public GameObject slotPrefab;    // 슬롯 프리팹
+    public Transform slotParent;     // 슬롯들 담을 부모 오브젝트
 
     Inventory inv;
+    List<GameObject> slots = new List<GameObject>();
 
     void Start()
     {
@@ -15,61 +16,26 @@ public class InventoryUI : MonoBehaviour
         Refresh();
     }
 
-    public void Refresh()
-    {
-        if (inv == null || slotIcon1 == null) return;
-
-        bool hasKey = inv.Has("Key");
-
-        // 🔑 아이템 있으면 아이콘 표시
-        slotIcon1.enabled = hasKey;
-
-        if (hasKey)
-        {
-            slotIcon1.sprite = keySprite;   // ⭐ 여기 중요
-        }
-        else
-        {
-            slotIcon1.sprite = null;
-            Selection.Clear();
-        }
-
-        // 선택 강조 색
-        if (slotBg1 != null)
-        {
-            slotBg1.color = Selection.Is("Key")
-                ? new Color(1f, 1f, 0.6f, 1f)
-                : Color.white;
-        }
-    }
-
-    // 슬롯 클릭 시 선택/해제
-    public void OnClickSlot1()
+public void Refresh()
 {
     if (inv == null) return;
+    if (slotPrefab == null) return;  // ← 이게 있어야 해요
+    if (slotParent == null) return;  // ← 이것도
 
-    if (!inv.Has("Key"))
+    foreach (var s in slots) Destroy(s);
+    slots.Clear();
+
+    foreach (var item in inv.GetAll())
     {
-        Selection.Clear();
-        return;
-    }
-
-    // 이미 선택돼 있으면 해제
-    if (Selection.Is("Key"))
+        var slot = Instantiate(slotPrefab, slotParent);
+        var slotUI = slot.GetComponent<InventorySlotUI>();
+         if (slotUI == null)  // ← 추가
     {
-        Selection.Clear();
+        Debug.LogError("InventorySlotUI 컴포넌트가 프리팹에 없어요!");
+        continue;
     }
-    else
-    {
-        // 🔑 선택
-        Selection.Select("Key");
-
-        // ⭐ 아이템 설명 팝업
-        if (PopupUI.I != null)
-            PopupUI.I.Show("It's an old key.");
+        slotUI.Setup(item);
+        slots.Add(slot);
     }
-
-    Refresh();
 }
-
 }

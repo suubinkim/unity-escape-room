@@ -1723,10 +1723,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 630530770}
     m_Modifications:
-    - target: {fileID: 997942642400735371, guid: c84239ee606b3404986e523002c12cb0, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2117358238410088327, guid: c84239ee606b3404986e523002c12cb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1746,10 +1742,6 @@ PrefabInstance:
     - target: {fileID: 2117358238410088327, guid: c84239ee606b3404986e523002c12cb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6854478647280213804, guid: c84239ee606b3404986e523002c12cb0, type: 3}
-      propertyPath: m_Color.a
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7229484415846681337, guid: c84239ee606b3404986e523002c12cb0, type: 3}
       propertyPath: m_Pivot.x

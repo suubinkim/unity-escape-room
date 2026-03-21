@@ -511,7 +511,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
   slotPrefab: {fileID: 7786474644810929684, guid: c84239ee606b3404986e523002c12cb0, type: 3}
   slotParent: {fileID: 252744501}
-  slotCount: 4
 --- !u!1 &454914566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,10 +1878,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 630530770}
     m_Modifications:
     - target: {fileID: 997942642400735371, guid: c84239ee606b3404986e523002c12cb0, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 8379749870104023693, guid: 50db6420486974974ae4ce5b09a3ab62, type: 3}
-    - target: {fileID: 997942642400735371, guid: c84239ee606b3404986e523002c12cb0, type: 3}
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
@@ -1936,7 +1931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229484415846681337, guid: c84239ee606b3404986e523002c12cb0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7229484415846681337, guid: c84239ee606b3404986e523002c12cb0, type: 3}
       propertyPath: m_SizeDelta.y

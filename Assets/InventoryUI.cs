@@ -6,36 +6,37 @@ public class InventoryUI : MonoBehaviour
 {
     public GameObject slotPrefab;    // 슬롯 프리팹
     public Transform slotParent;     // 슬롯들 담을 부모 오브젝트
+    public int slotCount = 4;  // ← Inspector에서 개수 지정
 
     Inventory inv;
-    List<GameObject> slots = new List<GameObject>();
+    List<InventorySlotUI> slots = new List<InventorySlotUI>();
 
     void Start()
     {
         inv = Object.FindFirstObjectByType<Inventory>();
-        Refresh();
+        InitSlots();  // ← 시작할 때 빈 슬롯 미리 생성
     }
-
-public void Refresh()
-{
-    if (inv == null) return;
-    if (slotPrefab == null) return;  // ← 이게 있어야 해요
-    if (slotParent == null) return;  // ← 이것도
-
-    foreach (var s in slots) Destroy(s);
-    slots.Clear();
-
-    foreach (var item in inv.GetAll())
+    void InitSlots()
     {
-        var slot = Instantiate(slotPrefab, slotParent);
-        var slotUI = slot.GetComponent<InventorySlotUI>();
-         if (slotUI == null)  // ← 추가
+        for (int i = 0; i < slotCount; i++)
+        {
+            var slot = Instantiate(slotPrefab, slotParent);
+            var slotUI = slot.GetComponent<InventorySlotUI>();
+            slotUI.Init();  // ← 빈 상태로 초기화
+            slots.Add(slotUI);
+        }
+    }
+
+    public void Refresh()
     {
-        Debug.LogError("InventorySlotUI 컴포넌트가 프리팹에 없어요!");
-        continue;
+        if (inv == null) return;
+        var items = inv.GetAll();
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (i < items.Count)
+                slots[i].Setup(items[i]);  // ← 아이템 있으면 채우기
+            else
+                slots[i].Init();           // ← 없으면 빈 슬롯
+        }
     }
-        slotUI.Setup(item);
-        slots.Add(slot);
-    }
-}
 }

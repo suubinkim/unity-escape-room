@@ -36,4 +36,12 @@ public class InventorySlotUI : MonoBehaviour
         }
         Refresh();
     }
+
+    public void Init()
+    {
+        item = null;
+        iconImage.enabled = false;  // 아이콘 숨기기
+        if (bgImage != null)
+            bgImage.color = Color.white;
+    }
 }
